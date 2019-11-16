@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -5,8 +9,16 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-stripe`,
+    {
+      resolve: `gatsby-source-stripe`,
+      options: {
+        objects: ['Product', 'Sku'],
+        secretKey: process.env.STRIPE_SECRET_KEY,
+        downloadFiles: true,
+      }
+    },
+    `gatsby-plugin-react-helmet`,
     {
       resolve: 'gatsby-plugin-postcss',
       options: {
@@ -20,7 +32,7 @@ module.exports = {
         develop: false,
         tailwind: true,
       }
-    }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
