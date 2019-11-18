@@ -9,16 +9,25 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+    `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     `gatsby-plugin-stripe`,
     {
       resolve: `gatsby-source-stripe`,
       options: {
-        objects: ['Product', 'Sku'],
+        objects: ['Sku'],
         secretKey: process.env.STRIPE_SECRET_KEY,
         downloadFiles: true,
-      }
+      },
     },
-    `gatsby-plugin-react-helmet`,
     {
       resolve: 'gatsby-plugin-postcss',
       options: {
@@ -33,15 +42,6 @@ module.exports = {
         tailwind: true,
       }
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
