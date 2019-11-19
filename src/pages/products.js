@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from '../components/layout';
 import { StaticQuery, graphql } from 'gatsby';
 
 class Product extends React.Component {
@@ -41,9 +42,9 @@ class Product extends React.Component {
 
         return (
             <form className="m-1 p-4" onSubmit={this.handleSubmit(id)}>
-                <h3>{name} - {formattedPrice} </h3>
                 <img className="w-32 h-32" alt="product" src={image} />
-                <button type="submit">Purchase</button>
+                <p> {name} - {formattedPrice} </p>
+                <button className="bg-purple-700 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded" type="submit">Purchase</button>
             </form>
         )
     }
@@ -72,17 +73,19 @@ export default () => (
         // ({ node: sku }) changes the node alias to sku for ergonomics
         // otherwise, we could proceed with node.id, node.currency instead
         render={data => (
-            <div className="flex flex-row flex-wrap flex-auto">
-                {data.allStripeSku.edges.map(({ node: sku }) =>
-                    <Product
-                        id={sku.id}
-                        currency={sku.currency}
-                        price={sku.price}
-                        image={sku.image}
-                        name={sku.attributes.name}
-                    />
-                )}
-            </div>
+            <Layout>
+                <div className="flex flex-row flex-wrap flex-auto">
+                    {data.allStripeSku.edges.map(({ node: sku }) =>
+                        <Product
+                            id={sku.id}
+                            currency={sku.currency}
+                            price={sku.price}
+                            image={sku.image}
+                            name={sku.attributes.name}
+                        />
+                    )}
+                </div>
+            </Layout>
         )}
     />
 )
