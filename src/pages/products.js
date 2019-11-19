@@ -1,5 +1,4 @@
 import React from 'react';
-import Layout from '../components/layout';
 import { StaticQuery, graphql } from 'gatsby';
 
 class Product extends React.Component {
@@ -35,14 +34,15 @@ class Product extends React.Component {
     }
 
     render() {
-        const { id, currency, price, name } = this.props;
+        const { id, currency, price, image, name } = this.props;
 
         const priceFloat = (price / 100).toFixed(2);
         const formattedPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency, maximumSignificantDigits: 2 }).format(priceFloat);
 
         return (
-            <form onSubmit={this.handleSubmit(id)}>
-                <h2>{name} - {formattedPrice} </h2>
+            <form className="m-1 p-4" onSubmit={this.handleSubmit(id)}>
+                <h3>{name} - {formattedPrice} </h3>
+                <img className="w-32 h-32" alt="product" src={image} />
                 <button type="submit">Purchase</button>
             </form>
         )
@@ -59,6 +59,7 @@ export default () => (
                     id
                     currency
                     price
+                    image
                     attributes {
                     name
                     }
@@ -71,16 +72,17 @@ export default () => (
         // ({ node: sku }) changes the node alias to sku for ergonomics
         // otherwise, we could proceed with node.id, node.currency instead
         render={data => (
-            <Layout>
+            <div className="flex flex-row flex-wrap flex-auto">
                 {data.allStripeSku.edges.map(({ node: sku }) =>
                     <Product
                         id={sku.id}
                         currency={sku.currency}
                         price={sku.price}
+                        image={sku.image}
                         name={sku.attributes.name}
                     />
                 )}
-            </Layout>
+            </div>
         )}
     />
 )
