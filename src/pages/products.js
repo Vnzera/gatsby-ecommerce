@@ -42,8 +42,8 @@ class Product extends React.Component {
 
         return (
             <form onSubmit={this.handleSubmit(id)}>
-                <h2>{name} ({formattedPrice}) </h2>
-                <button type="submit">Buy Now</button>
+                <h2>{name} - {formattedPrice} </h2>
+                <button type="submit">Purchase</button>
             </form>
         )
     }
