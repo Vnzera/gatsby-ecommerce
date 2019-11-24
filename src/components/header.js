@@ -3,33 +3,31 @@ import PropTypes from "prop-types"
 import React from "react"
 
 const Header = ({ siteTitle }) => (
-  <header className="flex items-center justify-between bg-purple-800 px-4 py-3">
-    <div
-    // style={{
-    //   margin: `0 auto`,
-    //   maxWidth: 960,
-    //   padding: `1.45rem 1.0875rem`,
-    // }}
-    >
-      <h2 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h2>
+  <header className="bg-purple-800">
+    <div className="flex items-center justify-between px-4 py-3">
+      <div>
+        <h2 className="m-0 p-1 rounded hover:bg-gray-800">
+          <Link
+            to="/"
+            className="no-underline text-white"
+          >
+            {siteTitle}
+          </Link>
+        </h2>
+      </div>
+      <div>
+        <button type="button" className="text-white hover:text-gray-800 focus:text-white focus:outline-none">
+          <svg className="h-6 w-6 fill-current" viewbox="0 0 24 24">
+            <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z" />
+          </svg>
+        </button>
+      </div>
     </div>
-    <div>
-      <button type="button" className="text-gray-500 hover:text-white focus:text-white focus:outline-none">
-        <svg className="h-6 w-6 fill-current" viewbox="0 0 24 24">
-          <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z" />
-        </svg>
-      </button>
-    </div>
+    <ul className="pt-2 pb-4">
+      <a className="block px-2 text-white font-semibold rounded hover:bg-gray-800" href="http://localhost:8000/about">About</a>
+      <a className="block px-2  text-white font-semibold rounded hover:bg-gray-800" href="http://localhost:8000/contact">Contact</a>
+      <a className="block px-2 text-white font-semibold rounded hover:bg-gray-800" href="http://localhost:8000/cart">Cart</a>
+    </ul>
   </header >
 )
 
@@ -38,7 +36,7 @@ Header.propTypes = {
 }
 
 Header.defaultProps = {
-  siteTitle: ``,
+  siteTitle: `Eternity`,
 }
 
 export default Header
