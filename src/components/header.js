@@ -33,9 +33,9 @@ const Header = ({ siteTitle }) => {
         </div>
       </div>
       <div className={`pt-2 pb-4 sm:pb-0 sm:flex ${isOpen ? 'block' : 'hidden'}`}>
-        <a className="block sm:mt-0 sm:w-auto w-40 px-2 py-1 text-white font-semibold rounded hover:bg-gray-800" href="http://localhost:8000/about">About</a>
-        <a className="block sm:mt-0 sm:w-auto w-40 px-2 py-1 text-white font-semibold rounded hover:bg-gray-800" href="http://localhost:8000/contact">Contact</a>
-        <a className="block sm:mt-0 sm:w-auto w-40 px-2 py-1 text-white font-semibold rounded hover:bg-gray-800" href="http://localhost:8000/cart">Cart</a>
+        <Link className="block sm:mt-0 sm:w-auto w-40 px-2 py-1 text-white font-semibold rounded hover:bg-gray-800" to="/about">About</Link>
+        <Link className="block sm:mt-0 sm:w-auto w-40 px-2 py-1 text-white font-semibold rounded hover:bg-gray-800" to="/contact">Contact</Link>
+        <Link className="block sm:mt-0 sm:w-auto w-40 px-2 py-1 text-white font-semibold rounded hover:bg-gray-800" to="/cart">Cart</Link>
       </div>
     </header >
   )
