@@ -7,7 +7,7 @@ export default function Contact() {
 
             <div className="w-full max-w-xs m-auto my-20">
                 <form
-                    data-netlify="true" name="contact" method="POST" class="form"
+                    data-netlify="true" name="contact" method="POST" data-netlify-honeypot="bot-field"
                     className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <input type="hidden" name="contact" value="contact" />
                     <div className="mb-4">
