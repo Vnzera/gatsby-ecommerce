@@ -29,7 +29,7 @@ export default function Contact() {
                             <textarea className="my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" name="message" rows="3" placeholder="Enter your message here" />
                         </div>
                     </div>
-                    <button className="my-0 mx-auto bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    <button className="my-0 mx-auto bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                         Submit
                     </button>
                 </form>
