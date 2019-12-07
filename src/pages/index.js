@@ -76,7 +76,7 @@ const IndexPage = () => (
     render={data => (
       <Layout>
         <SEO title="Home" />
-        <div className="flex flex-row flex-wrap flex-auto justify-center mx-auto">
+        <div className="flex flex-row flex-wrap flex-auto justify-center mx-auto my-20">
           {data.allStripeSku.edges.map(({ node: sku }) =>
             <Product
               id={sku.id}
