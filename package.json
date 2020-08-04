@@ -5,7 +5,8 @@
   "version": "0.1.0",
   "author": "Luis Diaz",
   "dependencies": {
-    "gatsby": "^2.17.11",
+    "@stripe/stripe-js": "^1.8.0",
+    "gatsby": "^2.24.26",
     "gatsby-image": "^2.2.31",
     "gatsby-plugin-manifest": "^2.2.27",
     "gatsby-plugin-offline": "^3.0.19",
@@ -21,7 +22,8 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-helmet": "^5.2.1",
-    "tailwindcss": "^1.1.3"
+    "tailwindcss": "^1.1.3",
+    "use-shopping-cart": "^2.1.0"
   },
   "devDependencies": {
     "prettier": "^1.19.1"

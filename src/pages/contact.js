@@ -4,7 +4,6 @@ import Layout from '../components/layout';
 export default function Contact() {
     return (
         <Layout>
-
             <div className="w-full max-w-xs m-auto my-20">
                 <form
                     data-netlify="true" name="contact" method="POST" data-netlify-honeypot="bot-field"
@@ -34,9 +33,6 @@ export default function Contact() {
                     </button>
                 </form>
             </div>
-
-
-
         </Layout >
     )
 }
