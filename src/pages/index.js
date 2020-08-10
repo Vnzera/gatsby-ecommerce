@@ -47,8 +47,9 @@ class Product extends React.Component {
     // if localStorage is empty then add the item and return
     let str = localStorage.getItem('cart');
 
-    if (!str) {
+    if (str === null) {
       localStorage.setItem('cart', JSON.stringify([this.state]));
+      console.log('First item: ', localStorage.getItem('cart'));
       return;
     }
 
