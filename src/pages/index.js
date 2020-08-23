@@ -3,8 +3,6 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { StaticQuery, graphql } from 'gatsby';
 
-// .redirectToCheckout logic will be moved to the cart page
-
 class Product extends React.Component {
 
   constructor(props) {
@@ -15,7 +13,8 @@ class Product extends React.Component {
       currency: props.currency,
       price: props.price,
       image: props.image,
-      name: props.name
+      name: props.name,
+      disabled: false,
     };
   }
 
@@ -44,22 +43,41 @@ class Product extends React.Component {
   };
 
   addToCart = () => {
-    // if localStorage is empty then add the item and return
+    // if localStorage is empty then disable buttons, add the item and return
     let str = localStorage.getItem('cart');
 
     if (str === null) {
+
+      // this.setState({
+      //   disabled: true
+      // });
+
       localStorage.setItem('cart', JSON.stringify([this.state]));
       console.log('First item: ', localStorage.getItem('cart'));
       return;
     }
 
-    // parse localStorage into an array and push the current item to the cart
-
+    // parse localStorage into an array  
     let arr = JSON.parse(str);
+
+    // check localStorage to see if the product has already been added
+    let duplicate = arr.find(item => item.id === this.state.id);
+
+    // disable the buttons, change the text and return if duplicate exists
+    if (duplicate) {
+      this.setState({
+        disabled: true
+      });
+
+      return;
+    }
+
+    // push the current item to the cart if not a duplicate
     arr.push(this.state);
     localStorage.setItem('cart', JSON.stringify(arr));
 
     console.log("final check: ", localStorage.getItem('cart'));
+    console.log('item state: ', this.state);
   }
 
   render() {
@@ -69,6 +87,16 @@ class Product extends React.Component {
     const priceFloat = (price / 100).toFixed(2);
     const formattedPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency, maximumSignificantDigits: 2 }).format(priceFloat);
 
+    let cartButton;
+
+    if (this.state.disabled) {
+
+      cartButton = <button onClick={this.addToCart} className="block m-2 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">In Cart</button>;
+    } else {
+
+      cartButton = <button onClick={this.addToCart} className="block m-2 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded">Add to Cart</button>;
+    }
+
     return (
       <div className="m-1 p-4"
       // onSubmit={this.handleSubmit(id)}
@@ -76,14 +104,13 @@ class Product extends React.Component {
         <img className="w-32 h-32 rounded object-cover" alt="product" src={image} />
         <p className="text-center"> {name} - {formattedPrice} </p>
 
-
-        <button onClick={this.increment} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">+</button>
+        <button onClick={this.decrement} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">-</button>
 
         {this.state.quantity}
 
-        <button onClick={this.decrement} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">-</button>
+        <button onClick={this.increment} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">+</button>
 
-        <button onClick={this.addToCart} className="block m-2 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded">Add to Cart</button>
+        {cartButton}
       </div>
     )
   }
@@ -108,7 +135,6 @@ const IndexPage = () => (
           }
 }
 `}
-
     // ({ node: sku }) changes the node alias to sku for ergonomics
     // otherwise, we could proceed with node.id, node.currency instead
     render={data => (
