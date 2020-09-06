@@ -1,8 +1,7 @@
-describe('app works', () => {
+describe('app', () => {
     it('works', () => {
         cy.visit('/')
-            .findByText(/about/i)
-            .click()
+            .findByText(/headset/i)
 
     })
 })
