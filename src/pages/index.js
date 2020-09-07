@@ -20,6 +20,8 @@ class Product extends React.Component {
 
   componentDidMount() {
     this.stripe = window.Stripe('pk_test_pSDUVreHtj3yJTvIGs2mtF1g00xJKPeSKp');
+
+    // check localStorage for a duplicate and disable both cart and quantity buttons if so
   }
 
   // we want to add a clickable + and - so that users can update quantity
@@ -43,21 +45,22 @@ class Product extends React.Component {
   };
 
   addToCart = () => {
-    // if localStorage is empty then disable buttons, add the item and return
+    // if localStorage is empty then disable the cart button, add the item and return
+    // this should only run for the very first item added to cart
     let str = localStorage.getItem('cart');
 
     if (str === null) {
 
-      // this.setState({
-      //   disabled: true
-      // });
+      this.setState({
+        disabled: true
+      });
 
       localStorage.setItem('cart', JSON.stringify([this.state]));
       console.log('First item: ', localStorage.getItem('cart'));
       return;
     }
 
-    // parse localStorage into an array  
+    // if localStorage isn't empty then turn the string contents into an array
     let arr = JSON.parse(str);
 
     // check localStorage to see if the product has already been added
@@ -72,9 +75,13 @@ class Product extends React.Component {
       return;
     }
 
-    // push the current item to the cart if not a duplicate
+    // push the current item to the cart if not a duplicate and disable the cart button
     arr.push(this.state);
     localStorage.setItem('cart', JSON.stringify(arr));
+
+    this.setState({
+      disabled: true
+    });
 
     console.log("final check: ", localStorage.getItem('cart'));
     console.log('item state: ', this.state);
@@ -86,6 +93,8 @@ class Product extends React.Component {
 
     const priceFloat = (price / 100).toFixed(2);
     const formattedPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency, maximumSignificantDigits: 2 }).format(priceFloat);
+
+    // display a different button if product is already added to cart
 
     let cartButton;
 
@@ -116,6 +125,7 @@ class Product extends React.Component {
   }
 }
 
+// get product data from Stripe
 const IndexPage = () => (
   <StaticQuery
     query={graphql`
@@ -135,7 +145,7 @@ const IndexPage = () => (
           }
 }
 `}
-    // ({ node: sku }) changes the node alias to sku for ergonomics
+    // ({ node: sku }) changes the node alias to sku
     // otherwise, we could proceed with node.id, node.currency instead
     render={data => (
       <Layout>
