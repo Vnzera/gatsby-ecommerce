@@ -3,6 +3,10 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { StaticQuery, graphql } from 'gatsby';
 
+// find a way to update state to match localStorage in cases where the user is returning
+// most likely through componentDidMount
+// refactor by breaking up code into helper functions
+
 class Product extends React.Component {
 
   constructor(props) {
@@ -22,6 +26,12 @@ class Product extends React.Component {
     this.stripe = window.Stripe('pk_test_pSDUVreHtj3yJTvIGs2mtF1g00xJKPeSKp');
 
     // check localStorage for a duplicate and disable both cart and quantity buttons if so
+    // let str = localStorage.getItem('cart');
+
+    // if cart is not empty then convert str cart into an array
+    // let arr = JSON.parse(str);
+
+    // find this product in cart and copy state to match
   }
 
   // we want to add a clickable + and - so that users can update quantity
@@ -95,6 +105,7 @@ class Product extends React.Component {
     const formattedPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency, maximumSignificantDigits: 2 }).format(priceFloat);
 
     // display a different button if product is already added to cart
+    // disable quantity update buttons also
 
     let cartButton;
 

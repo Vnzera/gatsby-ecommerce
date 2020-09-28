@@ -19,6 +19,10 @@ class CartItem extends React.Component {
     }
     // we want to add a clickable + and - so that users can update quantity
 
+    // function for converting localStorage from a str to array and vice versa
+
+    // function for updating localStorage cart
+
     increment = () => {
         this.setState({
             quantity: this.state.quantity + 1
@@ -69,6 +73,8 @@ class Cart extends React.Component {
     }
 
     componentDidMount() {
+        this.stripe = window.Stripe('pk_test_pSDUVreHtj3yJTvIGs2mtF1g00xJKPeSKp');
+
         let str = localStorage.getItem('cart');
 
         if (str === null) {
@@ -91,11 +97,46 @@ class Cart extends React.Component {
 
     }
 
+    handleSubmit(cart) {
+        // filter state so only sku and quantity remain
+        let filteredCart = cart.map((item) => {
+            return { sku: item.id, quantity: item.quantity }
+        });
+
+        return event => {
+            event.preventDefault();
+
+            this.stripe
+                .redirectToCheckout({
+                    // format for sending purchase data to stripe
+                    // items: [{ sku, quantity: 1 }],
+
+                    items: filteredCart,
+
+                    // Do not rely on the redirect to the successUrl for fulfilling
+                    // purchases, customers may not always reach the success_url after
+                    // a successful payment.
+                    // Instead use one of the strategies described in
+                    // https://stripe.com/docs/payments/checkout/fulfillment
+                    successUrl: 'https://ecommerce-gatsbyjs.netlify.com/success',
+                    cancelUrl: 'https://ecommerce-gatsbyjs.netlify.com/canceled',
+                })
+                .then(function (result) {
+                    if (result.error) {
+                        // If `redirectToCheckout` fails due to a browser or network
+                        // error, display the localized error message to your customer.
+                        var displayError = document.getElementById('error-message');
+                        displayError.textContent = result.error.message;
+                    }
+                });
+        }
+    }
+
     render() {
 
         if (this.state.empty) {
 
-            return (<div>Empty</div>)
+            return (<Layout><div>Empty</div></Layout>)
 
         }
 
@@ -113,6 +154,7 @@ class Cart extends React.Component {
                             quantity={item.quantity}
                         />
                     )}
+                    <button onClick={this.handleSubmit(this.state.cart)} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">Checkout</button>
                 </div>
             </Layout>
         )
@@ -124,32 +166,3 @@ class Cart extends React.Component {
 
 
 export default Cart;
-
-
-// handleSubmit(sku) {
-  //   return event => {
-  //     event.preventDefault();
-
-  //     this.stripe
-  //       .redirectToCheckout({
-  //         // grab quantity from localStorage
-  //         items: [{ sku, quantity: 1 }],
-
-  //         // Do not rely on the redirect to the successUrl for fulfilling
-  //         // purchases, customers may not always reach the success_url after
-  //         // a successful payment.
-  //         // Instead use one of the strategies described in
-  //         // https://stripe.com/docs/payments/checkout/fulfillment
-  //         successUrl: 'https://ecommerce-gatsbyjs.netlify.com/success',
-  //         cancelUrl: 'https://ecommerce-gatsbyjs.netlify.com/canceled',
-  //       })
-  //       .then(function (result) {
-  //         if (result.error) {
-  //           // If `redirectToCheckout` fails due to a browser or network
-  //           // error, display the localized error message to your customer.
-  //           var displayError = document.getElementById('error-message');
-  //           displayError.textContent = result.error.message;
-  //         }
-  //       });
-  //   }
-  // }
