@@ -3,9 +3,9 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { StaticQuery, graphql } from 'gatsby';
 
-// find a way to update state to match localStorage in cases where the user is returning
-// most likely through componentDidMount
-// refactor by breaking up code into helper functions
+// keep state and localStorage synced especially if visitor has an old cart stored
+// maybe through componentDidMount
+// refactor by breaking up code into helper functions and maybe putting those functions in a higher order component
 
 class Product extends React.Component {
 
@@ -24,6 +24,8 @@ class Product extends React.Component {
 
   componentDidMount() {
     this.stripe = window.Stripe('pk_test_pSDUVreHtj3yJTvIGs2mtF1g00xJKPeSKp');
+
+    // update props.price to be formatted so we don't repeat this logic on the cart page
 
     // check localStorage for a duplicate and disable both cart and quantity buttons if so
     // let str = localStorage.getItem('cart');
@@ -99,6 +101,7 @@ class Product extends React.Component {
 
   render() {
     // this has to do with formatting the price info we receive from stripe
+    // save price to state and push that to localStorage so we don't have to repeat this logic in Cart
     const { currency, price, image, name } = this.props;
 
     const priceFloat = (price / 100).toFixed(2);
@@ -157,7 +160,7 @@ const IndexPage = () => (
 }
 `}
     // ({ node: sku }) changes the node alias to sku
-    // otherwise, we could proceed with node.id, node.currency instead
+    // otherwise, we could proceed with node.id, node.currency etc instead
     render={data => (
       <Layout>
         <SEO title="Home" />

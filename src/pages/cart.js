@@ -1,9 +1,15 @@
 import React from 'react'
 import Layout from '../components/layout';
 
-// retrieve cart items from localStorage and display them
-// add event handlers for changing quantity of each item and deleting items
-// pass cart items to Stripe for payment page
+
+// add button to delete item and clear it from localStorage and state
+// add button to update quantity
+// dynamic subtotal calculation
+// checkout button should clear localStorage and state
+
+// you could set each item to have it's own entry in localStorage instead of 
+// storing everything under the cart key in 
+// currently (localStorage.cart stores everything) but localStorage.id could store each individual item
 
 class CartItem extends React.Component {
     constructor(props) {
@@ -17,11 +23,6 @@ class CartItem extends React.Component {
             name: props.name,
         };
     }
-    // we want to add a clickable + and - so that users can update quantity
-
-    // function for converting localStorage from a str to array and vice versa
-
-    // function for updating localStorage cart
 
     increment = () => {
         this.setState({
@@ -40,7 +41,7 @@ class CartItem extends React.Component {
     };
 
     render() {
-        // this has to do with formatting the price info
+        // same logic from index page
         const { currency, price, image, name } = this.props;
 
         const priceFloat = (price / 100).toFixed(2);
@@ -98,6 +99,7 @@ class Cart extends React.Component {
     }
 
     handleSubmit(cart) {
+        // we should not send entire state of product to Stripe so..
         // filter state so only sku and quantity remain
         let filteredCart = cart.map((item) => {
             return { sku: item.id, quantity: item.quantity }
@@ -108,7 +110,7 @@ class Cart extends React.Component {
 
             this.stripe
                 .redirectToCheckout({
-                    // format for sending purchase data to stripe
+                    // format for sending purchase data to stripe:
                     // items: [{ sku, quantity: 1 }],
 
                     items: filteredCart,
@@ -142,7 +144,7 @@ class Cart extends React.Component {
 
         return (
             <Layout>
-                <div className="flex flex-col  my-20">
+                <div className="mx-auto my-20">
                     {this.state.cart.map((item) =>
                         <CartItem
                             key={item.id}
