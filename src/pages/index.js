@@ -27,18 +27,34 @@ class Product extends React.Component {
 
     // update props.price to be formatted so we don't repeat this logic on the cart page
 
-    // check localStorage for a duplicate and disable both cart and quantity buttons if so
-    // let str = localStorage.getItem('cart');
+    let str = localStorage.getItem('cart');
 
-    // if cart is not empty then convert str cart into an array
-    // let arr = JSON.parse(str);
+    // if cart/localStorage is not empty then compare state to localStorage
+    if (str !== null) {
+      let arr = JSON.parse(str);
 
-    // find this product in cart and copy state to match
+      // check if this specific product is in localStorage
+      let storedItem = arr.find(item => item.id === this.state.id);
+
+      if (storedItem) {
+        // if quantity doesn't match then set values equal to localStorage
+        if (storedItem.quantity !== this.state.quantity) {
+          this.setState({
+            quantity: storedItem.quantity,
+            disabled: true
+          });
+        }
+
+      }
+
+    }
+
   }
 
   // we want to add a clickable + and - so that users can update quantity
   // The Add To Cart button will add the selected quantity to the cart/localStorage
   // "In Cart" text will appear and buttons will be disabled 
+  // possibly put increment and decrement logic into a HOC
 
   increment = () => {
     this.setState({
@@ -59,6 +75,7 @@ class Product extends React.Component {
   addToCart = () => {
     // if localStorage is empty then disable the cart button, add the item and return
     // this should only run for the very first item added to cart
+    // more logic to possibly put into a HOC
     let str = localStorage.getItem('cart');
 
     if (str === null) {
@@ -68,6 +85,7 @@ class Product extends React.Component {
       });
 
       localStorage.setItem('cart', JSON.stringify([this.state]));
+      console.log('First item state: ', this.state);
       console.log('First item: ', localStorage.getItem('cart'));
       return;
     }
@@ -121,17 +139,15 @@ class Product extends React.Component {
     }
 
     return (
-      <div className="m-1 p-4"
-      // onSubmit={this.handleSubmit(id)}
-      >
+      <div className="m-1 p-4">
         <img className="w-32 h-32 rounded object-cover" alt="product" src={image} />
         <p className="text-center"> {name} - {formattedPrice} </p>
 
-        <button onClick={this.decrement} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">-</button>
+        <button hidden={this.state.disabled} onClick={this.decrement} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">-</button>
 
         {this.state.quantity}
 
-        <button onClick={this.increment} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">+</button>
+        <button hidden={this.state.disabled} onClick={this.increment} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">+</button>
 
         {cartButton}
       </div>
