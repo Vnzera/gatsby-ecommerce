@@ -73,6 +73,9 @@ class Product extends React.Component {
   };
 
   addToCart = () => {
+    if (this.state.quantity === 0) {
+      return;
+    }
     // if localStorage is empty then disable the cart button, add the item and return
     // this should only run for the very first item added to cart
     // more logic to possibly put into a HOC
@@ -113,7 +116,7 @@ class Product extends React.Component {
       disabled: true
     });
 
-    console.log("final check: ", localStorage.getItem('cart'));
+    console.log("localStorage: ", localStorage.getItem('cart'));
     console.log('item state: ', this.state);
   }
 
