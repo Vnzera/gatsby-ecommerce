@@ -1,6 +1,5 @@
 import React from 'react'
 import Layout from '../components/layout';
-import { StaticQuery, graphql } from 'gatsby';
 
 // CartContext makes Stripe request and merges data with any old localStorage data 
 // Stripe data could contain new inventory and localStorage could contain old inventory etc

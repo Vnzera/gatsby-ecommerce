@@ -6,6 +6,7 @@
   "author": "Luis Diaz",
   "dependencies": {
     "@stripe/stripe-js": "^1.8.0",
+    "curl": "^0.1.4",
     "gatsby": "^2.24.26",
     "gatsby-image": "^2.2.31",
     "gatsby-plugin-manifest": "^2.2.27",
