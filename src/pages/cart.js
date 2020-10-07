@@ -99,6 +99,8 @@ class Cart extends React.Component {
     }
 
     handleSubmit(cart) {
+        // make sure cart state quantity equals quantity 
+
         // we should not send entire state of product to Stripe so..
         // filter state so only sku and quantity remain
         let filteredCart = cart.map((item) => {
