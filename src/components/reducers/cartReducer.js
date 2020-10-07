@@ -1,20 +1,41 @@
 const cartReducer = (state, action) => {
     switch (action.type) {
         case 'INCREMENT':
-            // find item in state by comparing action.id to id/sku in state items
+            // create a new cart array where that item is incremented
+            const newState = state.map(item => {
+                if (item.id === action.item.id) {
+                    item.quantity + 1;
+                    return item;
+                }
+            });
 
-            // create a new cart array where that item is incremented, sync to localStorage and return it
-            return
+            // sync to localStorage and return new state
+            localStorage.setItem('cart', JSON.stringify(newState));
+
+            return newState;
 
         case 'DECREMENT':
-            // find item in state by comparing action.id to id/sku in state items
+            // create a new cart array where that item is decremented
+            const newState = state.map(item => {
+                if (item.id === action.item.id) {
+                    item.quantity - 1;
+                    return item;
+                }
+            });
 
-            // create a new cart array where that item is decremented, sync to localStorage and return it
-            return
+            // sync to localStorage and return new state
+            localStorage.setItem('cart', JSON.stringify(newState));
+
+            return newState;
 
         case 'ZERO':
             // set all items quantity to 0 and return the new array
-            return
+            const newState = state.map(item => {
+                item.quantity = 0;
+                return item;
+            });
+
+            return newState;
 
         default:
             return state;

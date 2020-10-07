@@ -1,9 +1,12 @@
 import React from 'react'
 import Layout from '../components/layout';
+import { StaticQuery, graphql } from 'gatsby';
 
 // CartContext makes Stripe request and merges data with any old localStorage data 
 // Stripe data could contain new inventory and localStorage could contain old inventory etc
 // merge both so new items are included, old items are purged and quantity of items is in sync
+
+// turn product and cartitem classes into functional components that display props
 
 // cart component will get state from CartContext and display items with quantity > 0
 // gallery page will display all items

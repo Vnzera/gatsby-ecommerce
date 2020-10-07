@@ -60,4 +60,6 @@ const IndexPage = () => (
 
 )
 
+// GalleryPage could contain IndexPage wrapped in CartContext which passes quantities etc
+
 export default IndexPage
