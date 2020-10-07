@@ -5,12 +5,13 @@ import Layout from '../components/layout';
 // Stripe data could contain new inventory and localStorage could contain old inventory etc
 // merge both so new items are included, old items are purged and quantity of items is in sync
 
-// cart component will get state from CartContext and filter out items with quantity = 0
+// cart component will get state from CartContext and display items with quantity > 0
 // gallery page will display all items
 // both will be able to increment/decrement
 
 // components for increment and decrement buttons
 // component for subtotal calculation 
+// component for deleting/zeroing out quantity for specific item
 // component for checkout button
 // set all items quantity to 0 on success page but not failure
 
