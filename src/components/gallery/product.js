@@ -1,6 +1,4 @@
-// keep state and localStorage synced especially if visitor has an old cart stored
-// maybe through componentDidMount
-// refactor by breaking up code into helper functions and maybe putting those functions in a higher order component
+import React from 'react';
 
 export default class Product extends React.Component {
 

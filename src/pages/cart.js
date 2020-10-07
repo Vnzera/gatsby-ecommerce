@@ -1,15 +1,18 @@
 import React from 'react'
 import Layout from '../components/layout';
 
+// CartContext makes Stripe request and merges data with any old localStorage data 
+// Stripe data could contain new inventory and localStorage could contain old inventory etc
+// merge both so new items are included, old items are purged and quantity of items is in sync
 
-// add button to delete item and clear it from localStorage and state
-// add button to update quantity
-// dynamic subtotal calculation
-// checkout button should clear localStorage and state
+// cart component will get state from CartContext and filter out items with quantity = 0
+// gallery page will display all items
+// both will be able to increment/decrement
 
-// you could set each item to have it's own entry in localStorage instead of 
-// storing everything under the cart key in 
-// currently (localStorage.cart stores everything) but localStorage.id could store each individual item
+// components for increment and decrement buttons
+// component for subtotal calculation 
+// component for checkout button
+// set all items quantity to 0 on success page but not failure
 
 class CartItem extends React.Component {
     constructor(props) {
@@ -102,9 +105,13 @@ class Cart extends React.Component {
         // make sure cart state quantity equals quantity 
 
         // we should not send entire state of product to Stripe so..
-        // filter state so only sku and quantity remain
+        // filter state so only items with quantity > 0 remain
+        // and  only sku and quantity properties remain
         let filteredCart = cart.map((item) => {
-            return { sku: item.id, quantity: item.quantity }
+            if (item.quantity > 0) {
+                return { sku: item.id, quantity: item.quantity }
+            }
+
         });
 
         return event => {
