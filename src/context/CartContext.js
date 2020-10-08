@@ -1,8 +1,27 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import cartReducer from '../components/reducers/cartReducer';
+import { graphql } from 'gatsby';
+
 
 const API_KEY = process.env.STRIPE_SECRET_KEY;
-const url = 'https://api.stripe.com/v1/products/sk_test_gDzSxHcErlckm1CWqcU9KWfm00yx9imSNM:';
+const url = 'https://api.stripe.com/v1/products';
+
+// const query = graphql`
+// {
+//     allStripeSku {
+//         edges {
+//         node {
+//             id
+//             currency
+//             price
+//             image
+//             attributes {
+//             name
+//             }
+//         }
+//         }
+//     }
+// }`
 
 export const CartContext = createContext();
 
@@ -22,7 +41,7 @@ const CartContextProvider = (props) => {
         // retrieves all products from Stripe and dispatches "merge" action type
         fetch(url, {
             headers: {
-                'x-api-key': API_KEY,
+                'Authorization': `bearer ${API_KEY}`
             },
         })
             .then(res => {

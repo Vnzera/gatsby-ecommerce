@@ -5,6 +5,8 @@ import SEO from "../components/seo"
 import { CartContext } from '../context/CartContext';
 import { StaticQuery, graphql } from 'gatsby';
 
+// maybe useContext to dispatch StaticQuery data to cartReducer
+
 const IndexPage = () => {
   const { cart, dispatch } = useContext(CartContext);
 
@@ -39,6 +41,7 @@ export default IndexPage;
 // }
 
 // const IndexPage = () => (
+//   const { cart, dispatch } = useContext(CartContext);
 //   <StaticQuery
 //     query={graphql`
 //       {
@@ -77,7 +80,7 @@ export default IndexPage;
 //               price={sku.price}
 //               image={sku.image}
 //               name={sku.attributes.name}
-//               quantity={findQuantity(sku.id)}
+//               quantity={0}
 //             />
 //           )}
 //         </div>
