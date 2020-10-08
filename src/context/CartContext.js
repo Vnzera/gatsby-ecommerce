@@ -1,11 +1,5 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
 import cartReducer from '../components/reducers/cartReducer';
-
-// put request logic here and store response in state
-// then compare response to localStorage data and sync quantity property
-
-// may not need add to cart button on gallery page if increment/decrement functions are placed here
-// maybe just a temporary message that says "added to cart"
 
 const API_KEY = process.env.STRIPE_SECRET_KEY;
 const url = 'https://api.stripe.com/v1/products/sk_test_gDzSxHcErlckm1CWqcU9KWfm00yx9imSNM:';
@@ -25,8 +19,6 @@ const CartContextProvider = (props) => {
     });
 
     useEffect(() => {
-        stripe = window.Stripe('pk_test_pSDUVreHtj3yJTvIGs2mtF1g00xJKPeSKp');
-
         // retrieves all products from Stripe and dispatches "merge" action type
         fetch(url, {
             headers: {
@@ -52,6 +44,7 @@ const CartContextProvider = (props) => {
                         quantity: 0
                     }
                 });
+                console.log('payload: ', payload);
                 // dispatch 'merge' action 
                 dispatch({
                     type: 'MERGE',
@@ -59,7 +52,7 @@ const CartContextProvider = (props) => {
                 });
             })
             .catch(error => {
-                setError(error);
+                console.log(error);
             })
     }, []);
 
@@ -70,4 +63,8 @@ const CartContextProvider = (props) => {
     )
 }
 
-export default CartContextProvider;
+export default ({ element }) => (
+    <CartContextProvider>
+        {element}
+    </CartContextProvider>
+);
