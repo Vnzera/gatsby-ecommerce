@@ -1,29 +1,48 @@
 const cartReducer = (state, action) => {
     let newState;
+    console.log('action: ', action);
+    console.log('action state: ', state);
+
     switch (action.type) {
         case 'MERGE':
             // if state is empty then payload becomes newState
             if (state.length === 0) {
-                console.log('merged: ', action.payload);
-                localStorage.setItem('cart', JSON.stringify(action.payload));
-                return action.payload;
+                newState = action.payload.map(item => {
+                    return {
+                        key: item.id,
+                        id: item.id,
+                        currency: item.currency,
+                        price: item.price,
+                        image: item.image,
+                        name: item.name,
+                        quantity: 0
+                    }
+                });
+                console.log('merge: ', newState);
+                localStorage.setItem('cart', JSON.stringify(newState));
+                return newState;
             }
 
-            // merge localStorage with list of products/payload received from Stripe
-            newState = state.map(item => {
+            // else merge localStorage with list of products/payload received from Stripe
+            newState = action.payload.map(payloadItem => {
 
-                // find matching payload item
-                const found = action.payload.find(payloadItem => {
-                    return payloadItem.id === item.id;
+                // find matching local item
+                const found = state.find(localItem => {
+                    return payloadItem.id === localItem.id;
                 });
 
-                // return item with updated quantity from localStorage
-                if (item.quantity !== found.quantity) {
-                    item.quantity = found.quantity;
-                    return item;
+                // if matching local item isn't found then add payload item
+                if (!found) {
+                    return payloadItem;
+                } else {
+                    // return payloadItem with updated quantity from localStorage
+                    if (payloadItem.quantity !== found.quantity) {
+                        payloadItem.quantity = found.quantity;
+                        return payloadItem;
+                    }
                 }
 
-                return item;
+                return payloadItem;
             });
 
             console.log('merged: ', newState);

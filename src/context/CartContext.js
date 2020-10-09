@@ -1,77 +1,66 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import cartReducer from '../components/reducers/cartReducer';
-import { graphql } from 'gatsby';
-
 
 const API_KEY = process.env.STRIPE_SECRET_KEY;
-const url = 'https://api.stripe.com/v1/products';
+const url = 'https://api.stripe.com/v1/skus';
 
-// const query = graphql`
-// {
-//     allStripeSku {
-//         edges {
-//         node {
-//             id
-//             currency
-//             price
-//             image
-//             attributes {
-//             name
-//             }
-//         }
-//         }
-//     }
-// }`
+// you could move request logic to the Product page
+// Product page would request data from Stripe and dispatch stripe response 
+// using an action of type MERGE
+
+// cart page would use localStorage by default
 
 export const CartContext = createContext();
 
 const CartContextProvider = (props) => {
+    let stripeResponse;
+
     const [cart, dispatch] = useReducer(cartReducer, [], () => {
-        // set carts default value to localStorage cart if it's not empty
-        let localData = localStorage.getItem('cart');
 
-        if (localData !== null) {
-            return JSON.parse(localData);
+        let localDataString = localStorage.getItem('cart');
+
+        if (localDataString === null) {
+            return [];
+        } else {
+            return JSON.parse(localDataString);
         }
-
-        return [];
     });
 
     useEffect(() => {
-        // retrieves all products from Stripe and dispatches "merge" action type
         fetch(url, {
             headers: {
-                'Authorization': `bearer ${API_KEY}`
+                "Authorization": `Bearer ${API_KEY}`
             },
         })
             .then(res => {
                 if (res.ok) {
                     return res.json();
                 } else {
-                    throw Error('Error fetching product list!');
+                    throw Error('Error fetching the news!');
                 }
             })
             .then(res => {
-                const payload = res.data.map((product) => {
+                console.log('response: ', res);
+                stripeResponse = res.data.map((stripeSku) => {
                     return {
-                        key: product.id,
-                        id: product.id,
-                        currency: product.currency,
-                        price: product.price,
-                        image: product.image,
-                        name: product.attributes.name,
+                        key: stripeSku.id,
+                        id: stripeSku.id,
+                        currency: stripeSku.currency,
+                        price: stripeSku.price,
+                        image: stripeSku.image,
+                        name: stripeSku.attributes.name,
                         quantity: 0
                     }
                 });
-                console.log('payload: ', payload);
-                // dispatch 'merge' action 
+                console.log('stripeResponse: ', stripeResponse);
                 dispatch({
                     type: 'MERGE',
-                    payload
-                });
+                    payload: stripeResponse
+                })
+                return stripeResponse;
             })
             .catch(error => {
-                console.log(error);
+                console.log('error: ', error);
             })
     }, []);
 
