@@ -54,9 +54,9 @@ class CartItem extends React.Component {
         const formattedPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency, maximumSignificantDigits: 2 }).format(priceFloat);
 
         return (
-            <div className="flex justify-center m-1 p-4">
+            <div className="block m-1 p-4">
 
-                <img className="w-32 h-32 rounded object-cover" alt="product" src={image} />
+                <img className="w-32 h-32 m-auto rounded object-cover" alt="product" src={image} />
                 <p className="text-center"> {name} - {formattedPrice} </p>
 
                 <button onClick={this.decrement} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">-</button>
