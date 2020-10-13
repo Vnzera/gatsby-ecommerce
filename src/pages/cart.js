@@ -80,7 +80,6 @@ class Cart extends React.Component {
     }
 
     componentDidMount() {
-        this.stripe = window.Stripe('pk_test_pSDUVreHtj3yJTvIGs2mtF1g00xJKPeSKp');
 
         let str = localStorage.getItem('cart');
 

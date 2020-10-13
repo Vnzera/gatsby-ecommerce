@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+// higher order component should provide common functions to this and cart page
 
 export default class Product extends React.Component {
 
@@ -16,7 +18,6 @@ export default class Product extends React.Component {
     }
 
     componentDidMount() {
-        this.stripe = window.Stripe('pk_test_pSDUVreHtj3yJTvIGs2mtF1g00xJKPeSKp');
 
         // update props.price to be formatted so we don't repeat this logic on the cart page
 

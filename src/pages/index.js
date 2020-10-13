@@ -5,7 +5,10 @@ import SEO from "../components/seo"
 import { CartContext } from '../context/CartContext';
 
 const ProductPage = () => {
+  // grab cart state from context and dispatch function'
+  // each product should be able to dispatch an action to update state quantity
   const { cart, dispatch } = useContext(CartContext);
+  // generate a Product element for each item in cart state
   return (
     <Layout>
       <SEO title="Home" />
