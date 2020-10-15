@@ -54,7 +54,7 @@ const cartReducer = (state, action) => {
             // create a new cart array where that item is incremented
             newState = state.map(item => {
                 if (item.id === action.payload.id) {
-                    item.quantity + 1;
+                    item.quantity++;
                     return item;
                 } else {
                     return item;
@@ -62,6 +62,7 @@ const cartReducer = (state, action) => {
             });
 
             // sync to localStorage and return new state
+            console.log('increment: ', newState);
             localStorage.setItem('cart', JSON.stringify(newState));
 
             return newState;
@@ -70,14 +71,17 @@ const cartReducer = (state, action) => {
             // create a new cart array where that item is decremented
             newState = state.map(item => {
                 if (item.id === action.payload.id) {
-                    item.quantity - 1;
-                    return item;
+                    if (item.quantity !== 0) {
+                        item.quantity--;
+                        return item;
+                    }
                 } else {
                     return item;
                 }
             });
 
             // sync to localStorage and return new state
+            console.log('decrement: ', newState);
             localStorage.setItem('cart', JSON.stringify(newState));
 
             return newState;
@@ -89,6 +93,7 @@ const cartReducer = (state, action) => {
                 return item;
             });
 
+            console.log('zero: ', newState);
             localStorage.setItem('cart', JSON.stringify(newState));
 
             return newState;

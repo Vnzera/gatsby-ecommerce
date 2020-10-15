@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import Layout from "../components/layout"
-import Product from "../components/gallery/product"
+import Product from "../components/product"
 import SEO from "../components/seo"
 import { CartContext } from '../context/CartContext';
 
