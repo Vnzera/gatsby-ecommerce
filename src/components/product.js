@@ -33,9 +33,9 @@ const Product = (props) => {
         console.log('CartButton ran');
         // if item is already in cart then disable the AddToCart button
         if (added) {
-            return <button onClick={addToCart} className="block m-auto bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">In Cart</button>;
+            return (<button className="block m-auto bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">In Cart</button>);
         } else {
-            return <button onClick={addToCart} className="block m-auto bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded">Add to Cart</button>;
+            return (<button onClick={addToCart} className="block m-auto bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded">Add to Cart</button>);
         }
     }
 
