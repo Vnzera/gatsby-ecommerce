@@ -1,0 +1,43 @@
+import React from 'react';
+
+const CartItem = (props) => {
+    const { currency, quantity, price, image, name, id, dispatch } = props;
+
+    const priceFloat = (price / 100).toFixed(2);
+    const formattedPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency, maximumSignificantDigits: 2 }).format(priceFloat);
+
+    const increment = () => {
+        dispatch({
+            type: 'INCREMENT',
+            payload: {
+                id
+            }
+        })
+    }
+
+    const decrement = () => {
+        dispatch({
+            type: 'DECREMENT',
+            payload: {
+                id
+            }
+        })
+    }
+
+    return (
+        <div className="block m-1 p-4">
+
+            <img className="w-32 h-32 m-auto rounded object-cover" alt="product" src={image} />
+            <p className="text-center"> {name} - {formattedPrice} </p>
+
+            <button onClick={decrement} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">-</button>
+
+            {quantity}
+
+            <button onClick={increment} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">+</button>
+
+        </div>
+    )
+}
+
+export default CartItem;

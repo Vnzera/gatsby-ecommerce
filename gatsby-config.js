@@ -34,6 +34,14 @@ module.exports = {
       }
     },
     {
+      resolve: `gatsby-source-stripe`,
+      options: {
+        objects: ['Product', 'Sku'],
+        secretKey: 'pk_test_pSDUVreHtj3yJTvIGs2mtF1g00xJKPeSKp',
+        downloadFiles: true,
+      }
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `gatsby-starter-default`,
