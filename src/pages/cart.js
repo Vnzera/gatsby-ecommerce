@@ -2,6 +2,8 @@ import React from 'react';
 import Layout from '../components/layout';
 import CartItem from '../components/cartitem';
 import { CartContext } from '../context/CartContext';
+import { loadStripe } from '@stripe/stripe-js';
+const stripePromise = loadStripe('pk_test_pSDUVreHtj3yJTvIGs2mtF1g00xJKPeSKp');
 
 // component for subtotal calculation 
 // component for deleting/zeroing out quantity for specific item
@@ -10,45 +12,19 @@ import { CartContext } from '../context/CartContext';
 class Cart extends React.Component {
     static contextType = CartContext;
 
-    componentDidMount() {
-        this.stripe = window.Stripe('pk_test_pSDUVreHtj3yJTvIGs2mtF1g00xJKPeSKp');
-    }
-
-    handleSubmit(cart) {
-        // we should not send entire state of product to Stripe so..
-        // filter state so only items with quantity > 0 remain
-        // and  only sku and quantity properties remain
-        let filteredCart = cart.map((item) => {
+    handleSubmit = async (cart) => {
+        const stripe = await stripePromise;
+        let filteredCart = cart.map(item => {
             return { sku: item.id, quantity: item.quantity }
         });
 
-        return event => {
-            event.preventDefault();
+        const { error } = await stripe.redirectToCheckout({
+            items: filteredCart,
+            successUrl: 'https://ecommerce-gatsbyjs.netlify.com/success',
+            cancelUrl: 'https://ecommerce-gatsbyjs.netlify.com/canceled',
+        });
 
-            this.stripe
-                .redirectToCheckout({
-                    // format for sending purchase data to stripe:
-                    // items: [{ sku, quantity: 1 }],
-
-                    items: filteredCart,
-
-                    // Do not rely on the redirect to the successUrl for fulfilling
-                    // purchases, customers may not always reach the success_url after
-                    // a successful payment.
-                    // Instead use one of the strategies described in
-                    // https://stripe.com/docs/payments/checkout/fulfillment
-                    successUrl: 'https://ecommerce-gatsbyjs.netlify.com/success',
-                    cancelUrl: 'https://ecommerce-gatsbyjs.netlify.com/canceled',
-                })
-                .then(function (result) {
-                    if (result.error) {
-                        // If `redirectToCheckout` fails due to a browser or network
-                        // error, display the localized error message to your customer.
-                        var displayError = document.getElementById('error-message');
-                        displayError.textContent = result.error.message;
-                    }
-                });
-        }
+        console.log('error: ', error);
     }
 
     render() {
@@ -59,7 +35,7 @@ class Cart extends React.Component {
 
         if (cartList.length === 0) {
 
-            return (<Layout><div>Empty</div></Layout>)
+            return (<Layout><div className="mx-auto my-20">Empty</div></Layout>)
 
         }
 
@@ -78,7 +54,7 @@ class Cart extends React.Component {
                             dispatch={dispatch}
                         />
                     )}
-                    <button onClick={this.handleSubmit(cartList)} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">Checkout</button>
+                    <button onClick={() => { this.handleSubmit(cartList) }} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">Checkout</button>
                 </div>
             </Layout>
         )
