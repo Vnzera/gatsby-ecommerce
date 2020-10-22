@@ -37,7 +37,8 @@ const CartItem = (props) => {
         <div className="block m-1 p-4">
 
             <img className="w-32 h-32 m-auto rounded object-cover" alt="product" src={image} />
-            <p className="text-center"> {name} - {formattedPrice} </p>
+            <p className="text-center m-1"> {name}  </p>
+            <button className="block mx-auto mb-1 bg-black hover:bg-black text-white font-bold py-1 px-4 rounded"> {formattedPrice}</button>
 
             <button onClick={decrement} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">-</button>
 
