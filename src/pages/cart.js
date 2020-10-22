@@ -30,9 +30,14 @@ class Cart extends React.Component {
 
     render() {
         const { cart, dispatch } = this.context;
+
         let cartList = cart.filter(item => {
             return item.quantity > 0;
         });
+
+        let cartTotal = cartList.reduce((total, item) => {
+            return total + (item.price * item.quantity);
+        }, 0);
 
         if (cartList.length === 0) {
 
@@ -56,6 +61,10 @@ class Cart extends React.Component {
                         />
                     )}
                     <button onClick={() => this.handleSubmit(cartList)} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">Checkout</button>
+                    <button
+                        className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">
+                        Total: ${cartTotal / 100}
+                    </button>
                 </div>
             </Layout>
         )
