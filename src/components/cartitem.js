@@ -24,6 +24,15 @@ const CartItem = (props) => {
         })
     }
 
+    const remove = () => {
+        dispatch({
+            type: 'REMOVE',
+            payload: {
+                id
+            }
+        })
+    }
+
     return (
         <div className="block m-1 p-4">
 
@@ -35,6 +44,8 @@ const CartItem = (props) => {
             {quantity}
 
             <button onClick={increment} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">+</button>
+
+            <button onClick={remove} className="block m-auto my-2 bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-4 rounded">X</button>
 
         </div>
     )

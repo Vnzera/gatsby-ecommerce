@@ -7,7 +7,6 @@ const stripePromise = loadStripe('pk_test_pSDUVreHtj3yJTvIGs2mtF1g00xJKPeSKp');
 
 // component for subtotal calculation 
 // component for deleting/zeroing out quantity for specific item
-// set all items quantity to 0 on success page but not failure
 
 class Cart extends React.Component {
     static contextType = CartContext;
@@ -20,6 +19,8 @@ class Cart extends React.Component {
 
         const { error } = await stripe.redirectToCheckout({
             items: filteredCart,
+            // successUrl: 'https://localhost:8000/success',
+            // cancelUrl: 'https://localhost:8000/canceled',
             successUrl: 'https://ecommerce-gatsbyjs.netlify.com/success',
             cancelUrl: 'https://ecommerce-gatsbyjs.netlify.com/canceled',
         });

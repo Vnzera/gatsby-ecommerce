@@ -86,14 +86,30 @@ const cartReducer = (state, action) => {
 
             return newState;
 
-        case 'ZERO':
+        case 'SUCCESS':
             // set all items quantity to 0 and return the new array
             newState = state.map(item => {
                 item.quantity = 0;
                 return item;
             });
 
-            console.log('zero: ', newState);
+            console.log('SUCCESS: ', newState);
+            localStorage.setItem('cart', JSON.stringify(newState));
+
+            return newState;
+
+        case 'REMOVE':
+            newState = state.map(item => {
+                if (item.id === action.payload.id) {
+                    item.quantity = 0;
+                    return item;
+                } else {
+                    return item;
+                }
+            });
+
+            // sync to localStorage and return new state
+            console.log('remove: ', newState);
             localStorage.setItem('cart', JSON.stringify(newState));
 
             return newState;
