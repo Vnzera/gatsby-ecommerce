@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
+const CartButton = ({ added, addToCart }) => {
+    console.log('CartButton ran');
+    // if item is already in cart then disable the AddToCart button
+    if (added) {
+        return (<button className="block m-auto bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">In Cart</button>);
+    } else {
+        return (<button onClick={addToCart} className="block m-auto bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded">Add to Cart</button>);
+    }
+}
+
 const Product = (props) => {
     const { name, image, currency, price, quantity, dispatch } = props;
     // check whether product is in cart/localStorage or not
@@ -27,16 +37,6 @@ const Product = (props) => {
             }
         });
 
-    }
-
-    const CartButton = () => {
-        console.log('CartButton ran');
-        // if item is already in cart then disable the AddToCart button
-        if (added) {
-            return (<button className="block m-auto bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed">In Cart</button>);
-        } else {
-            return (<button onClick={addToCart} className="block m-auto bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded">Add to Cart</button>);
-        }
     }
 
     useEffect(() => {
@@ -71,7 +71,7 @@ const Product = (props) => {
             <img className="w-32 h-32 rounded object-cover" alt="product" src={image} />
             <p className="text-center m-1"> {name}  </p>
             <button className="block mx-auto mb-1 bg-black hover:bg-black text-white font-bold py-1 px-4 rounded"> {formattedPrice}</button>
-            {CartButton()}
+            <CartButton addToCart={addToCart} added={added} />
         </div>
     )
 }

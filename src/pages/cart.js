@@ -5,9 +5,6 @@ import { CartContext } from '../context/CartContext';
 import { loadStripe } from '@stripe/stripe-js';
 const stripePromise = loadStripe('pk_test_pSDUVreHtj3yJTvIGs2mtF1g00xJKPeSKp');
 
-// component for subtotal calculation 
-// component for deleting/zeroing out quantity for specific item
-
 class Cart extends React.Component {
     static contextType = CartContext;
 
