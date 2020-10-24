@@ -70,7 +70,7 @@ const Product = (props) => {
         <div className="m-1 p-4">
             <img className="w-32 h-32 rounded object-cover" alt="product" src={image} />
             <p className="text-center m-1"> {name}  </p>
-            <button className="block mx-auto mb-1 bg-black hover:bg-black text-white font-bold py-1 px-4 rounded"> {formattedPrice}</button>
+            <p className="mx-auto my-1">{formattedPrice}</p>
             <CartButton addToCart={addToCart} added={added} />
         </div>
     )

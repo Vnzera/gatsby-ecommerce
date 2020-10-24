@@ -12,10 +12,10 @@ const Header = ({ siteTitle }) => {
   }
 
   return (
-    <header className="bg-teal-600 sm:flex sm:justify-between sm:px-4 sm:py-3">
+    <header className="bg-black sm:flex sm:justify-between sm:px-4 sm:py-3">
       <div className="flex items-center justify-between px-4 py-3 sm:p-0">
         <div>
-          <h2 className="m-0 p-1 rounded hover:bg-teal-700">
+          <h2 className="m-0 p-1 rounded hover:bg-teal-800">
             <Link
               to="/"
               className="no-underline text-white"
