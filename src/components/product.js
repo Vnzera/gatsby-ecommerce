@@ -69,8 +69,8 @@ const Product = (props) => {
     return (
         <div className="m-1 p-4">
             <img className="w-32 h-32 rounded object-cover" alt="product" src={image} />
-            <p className="text-center m-1"> {name}  </p>
-            <p className="mx-auto my-1">{formattedPrice}</p>
+            <p className="text-center m-2"> {name}  </p>
+            <p className="mx-auto my-2">{formattedPrice}</p>
             <CartButton addToCart={addToCart} added={added} />
         </div>
     )
