@@ -4,7 +4,7 @@ const CartItem = (props) => {
     const { currency, quantity, price, image, name, id, dispatch } = props;
 
     const total = price * quantity;
-    const totalPriceFloat = (total / 100).toFixed(2);
+    const totalPriceFloat = (total / 100).toFixed(0);
     const totalFormattedPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency, maximumSignificantDigits: 2 }).format(totalPriceFloat);
 
 

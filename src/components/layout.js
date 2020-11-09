@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
           textAlign: 'center'
         }}
       >
-        <main>{children}</main>
+        <main className="flex-grow">{children}</main>
         <footer>
           © {new Date().getFullYear()}, Built with
           {` `}

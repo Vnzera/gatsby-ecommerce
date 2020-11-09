@@ -5,6 +5,9 @@ html {
 }
 body {
   margin: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: black;
@@ -201,7 +204,6 @@ html {
   box-sizing: inherit;
 }
 body {
-  color: hsla(0, 0%, 0%, 0.8);
   font-family: georgia, serif;
   font-weight: normal;
   word-wrap: break-word;

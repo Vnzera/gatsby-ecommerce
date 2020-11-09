@@ -38,7 +38,12 @@ class Cart extends React.Component {
 
         if (cartList.length === 0) {
 
-            return (<Layout><div className="mx-auto my-20">Empty</div></Layout>)
+            return (
+                <Layout>
+                    <div className="mx-auto my-20">
+                        <p className="m-64">Your cart is empty</p>
+                    </div>
+                </Layout>)
 
         }
 

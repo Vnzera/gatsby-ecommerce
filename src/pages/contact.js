@@ -4,6 +4,7 @@ import Layout from '../components/layout';
 export default function Contact() {
     return (
         <Layout>
+            <h3 className="mt-16">Contact us with any questions or concerns</h3>
             <div className="w-full max-w-xs m-auto my-20">
                 <form
                     data-netlify="true" name="contact" method="POST" data-netlify-honeypot="bot-field"
