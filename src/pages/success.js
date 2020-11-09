@@ -19,10 +19,12 @@ const SuccessPage = () => {
 
   return (
     <Layout>
-      <SEO title="Success Page" />
-      <h1>Success!</h1>
-      <p>Your payment was accepted.</p>
-      <Link to="/">Go back to the homepage</Link>
+      <div className="m-56">
+        <SEO title="Success Page" />
+        <h1>Success!</h1>
+        <p>Your payment was accepted.</p>
+        <Link to="/">Go back to the homepage</Link>
+      </div>
     </Layout>
   )
 }
