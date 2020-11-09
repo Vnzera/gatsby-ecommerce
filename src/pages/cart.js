@@ -20,6 +20,9 @@ class Cart extends React.Component {
             // cancelUrl: 'https://localhost:8000/canceled',
             successUrl: 'https://ecommerce-gatsbyjs.netlify.com/success',
             cancelUrl: 'https://ecommerce-gatsbyjs.netlify.com/canceled',
+            shippingAddressCollection: {
+                allowedCountries: ['US'],
+            }
         });
 
         console.log('error: ', error);

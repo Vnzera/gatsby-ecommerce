@@ -10,7 +10,7 @@ export default function About() {
                 </div>
                 <div className="mt-4 md:mt-1">
                     <div className="uppercase tracking-wide text-sm text-teal-600 font-bold">Xochitl</div>
-                    <h2 className="block mt-2 text-lg leading-tight font-bold text-gray-900">Headline</h2>
+                    <h2 className="block mt-2 text-lg leading-tight font-bold">Headline</h2>
                     <p className="mt-1 text-gray-600">Insert Xochitl's entire life story here.</p>
                 </div>
             </div>
@@ -20,7 +20,7 @@ export default function About() {
                 </div>
                 <div className="mt-4 md:mt-1">
                     <div className="uppercase tracking-wide text-sm text-teal-600 font-bold">Jazmin</div>
-                    <h2 className="block mt-2 text-lg leading-tight font-bold text-gray-900">Headline</h2>
+                    <h2 className="block mt-2 text-lg leading-tight font-bold">Headline</h2>
                     <p className="mt-1 text-gray-600">Insert Jazmin's entire life story here.</p>
                 </div>
             </div>
