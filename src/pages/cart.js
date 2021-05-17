@@ -65,11 +65,11 @@ class Cart extends React.Component {
                             dispatch={dispatch}
                         />
                     )}
-                    <button onClick={() => this.handleSubmit(cartList)} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">Checkout</button>
                     <button
                         className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">
                         Total: ${cartTotal / 100}
                     </button>
+                    <button onClick={() => this.handleSubmit(cartList)} className="m-1 bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">Checkout</button>
                 </div>
             </Layout>
         )

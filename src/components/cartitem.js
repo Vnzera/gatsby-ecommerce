@@ -36,7 +36,7 @@ const CartItem = (props) => {
     }
 
     return (
-        <div className="block m-1 p-4">
+        <div className="max-w-xs my-4 mx-auto p-4 border-2 border-gray-500">
 
             <img className="w-32 h-32 m-auto rounded object-cover" alt="product" src={image} />
             <p className="text-center m-1"> {name}  </p>

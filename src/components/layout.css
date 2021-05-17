@@ -10,8 +10,8 @@ body {
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
-  color: white;
+  background-color: rgb(255, 255, 255);
+  color: rgb(31, 29, 29);
 }
 article,
 aside,
@@ -217,7 +217,7 @@ header {
   border: 0.5px solid #2b665e;
 }
 footer {
-  color: white;
+  color: rgb(31, 29, 29);
 }
 img {
   max-width: 100%;
@@ -395,7 +395,7 @@ p {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 1.45rem;
-  color:white;
+  color:rgb(31, 29, 29);
 }
 figure {
   margin-left: 0;

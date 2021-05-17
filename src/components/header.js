@@ -12,13 +12,13 @@ const Header = ({ siteTitle }) => {
   }
 
   return (
-    <header className="bg-black sm:flex sm:justify-between sm:px-4 sm:py-3">
+    <header className="bg-white sm:flex sm:justify-between sm:px-4 sm:py-3">
       <div className="flex items-center justify-between px-4 py-3 sm:p-0">
         <div>
           <h2 className="m-0 p-1 rounded hover:bg-teal-800">
             <Link
               to="/"
-              className="no-underline text-white"
+              className="no-underline text-gray"
             >
               {siteTitle}
             </Link>
@@ -33,10 +33,10 @@ const Header = ({ siteTitle }) => {
         </div>
       </div>
       <div className={`pt-2 pb-4 sm:pb-0 sm:flex ${isOpen ? 'block' : 'hidden'}`}>
-        <Link className="block sm:mt-0 sm:w-auto w-40 px-2 py-1 text-white font-semibold rounded hover:bg-teal-700" to="/">Products</Link>
-        <Link className="block sm:mt-0 sm:w-auto w-40 px-2 py-1 text-white font-semibold rounded hover:bg-teal-700" to="/about">About</Link>
-        <Link className="block sm:mt-0 sm:w-auto w-40 px-2 py-1 text-white font-semibold rounded hover:bg-teal-700" to="/contact">Contact</Link>
-        <Link className="block sm:mt-0 sm:w-auto w-40 px-2 py-1 text-white font-semibold rounded hover:bg-teal-700" to="/cart">Cart</Link>
+        <Link className="block sm:mt-0 sm:w-auto w-40 px-2 py-1 text-gray font-semibold rounded hover:bg-teal-700" to="/">Products</Link>
+        <Link className="block sm:mt-0 sm:w-auto w-40 px-2 py-1 text-gray font-semibold rounded hover:bg-teal-700" to="/about">About</Link>
+        <Link className="block sm:mt-0 sm:w-auto w-40 px-2 py-1 text-gray font-semibold rounded hover:bg-teal-700" to="/contact">Contact</Link>
+        <Link className="block sm:mt-0 sm:w-auto w-40 px-2 py-1 text-gray font-semibold rounded hover:bg-teal-700" to="/cart">Cart</Link>
       </div>
     </header >
   )
