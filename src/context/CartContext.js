@@ -2,7 +2,7 @@ import React, { createContext, useReducer, useEffect } from 'react';
 import cartReducer from '../components/reducers/cartReducer';
 import defaultState from './defaultState';
 
-const API_KEY = process.env.STRIPE_SECRET_KEY;
+const API_KEY = process.env.GATSBY_STRIPE_SECRET_KEY;
 const url = 'https://api.stripe.com/v1/skus';
 
 export const CartContext = createContext();
