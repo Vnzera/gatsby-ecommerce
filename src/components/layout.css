@@ -213,9 +213,7 @@ body {
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
 }
-header {
-  border: 0.5px solid #2b665e;
-}
+
 footer {
   color: rgb(31, 29, 29);
 }
